@@ -1,0 +1,69 @@
+body{
+    font-family: 'Abril Fatface', cursive;
+    background-color:#F0F3F4  ;
+}
+#output p{
+    color: #aaa;
+    padding: 14px 0;
+    margin: 0 20px;   
+}
+.vh-60{
+  height: 60vh !important;
+}
+.vh-56{
+  height: 56vh !important;
+}
+.vw-1-50{
+  width: 50vh !important;
+}
+.scroll{
+        border: #e9e9e9 1px solid;
+        box-sizing: content-box;
+        overflow-y: scroll;
+        box-shadow: 1px 3px 5px rgba(0, 0, 0, .5);
+}
+input{
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border: 0;
+    display: block;
+
+}
+
+button {
+    border: #343a40 1px solid;
+    outline: none;
+    background-color: transparent;
+}
+
+#show,#hide {
+    display:none;
+}
+
+div#content {
+    display:none;
+  padding:10px;
+  background-color:#f6f6f6;
+  width:200px;
+  cursor:pointer;
+}
+
+input#show:checked ~ div#content {
+    display:block;
+}
+
+input#hide:checked ~ div#content {
+    display:none;
+}
+#arfile{
+     width: 30px;
+     height: 30px;
+     -moz-border-radius: 50%;
+     -webkit-border-radius: 50%;
+     border-radius: 50%;
+        background-color: #0062cc;
+}
+#arfile:hover {
+        background-color: #007bff;
+
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width=500, initial-scale=1, maximum-scale=1, width=device-width,   user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Node.js</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/estilo.css" rel="stylesheet">
+    <link href="css/mdb.css" rel="stylesheet">
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/node.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="img/node.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="img/node.png" sizes="64x64">
+</head>
+<body aria-busy="true" onunload="myFunction();">
+
+   <div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-2 col-sm-12 col-12">
+   <h1><u>Node.js <small style="color:#007bff">Chat:</small></u></h1>  
+ 
+            <em><strong>User:</strong></em>
+
+<input class="form-control form-control-lg" type="text" id="username" placeholder="user" required>     
+            
+            <em><strong>User list:</strong></em>
+<!-------------------------------------------------------------------------------------------------------->
+            <div class="scroll" style="width:200px;height:550px;">
+            <div id="usuarios" class="mx-3"></div>
+                </div>    
+<!--------------------------------------------------------------------------------------------------------->   
+    </div>
+    <div class="col-xl-10 col-sm-12 col-12  w-100 p-3">
+
+<div class="scroll" style="height: 636px;">
+                        <div id="chat"></div>
+                        <div id="output"></div>
+                        <div id="actions"></div>
+</div>
+<!--------------------------------------------------------------------------------------------------------->
+ <div class="container ">
+  <div class="row">
+    <div class="col mt-2">
+
+<div class="pos-f-t ">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+<button onclick="emoji(1);">😜</button>
+<button onclick="emoji(2);">😂</button>
+<button onclick="emoji(3);">😋</button>
+<button onclick="emoji(4);">😇</button>
+<button onclick="emoji(5);">😌</button>
+<button onclick="emoji(6);">😀</button>
+<button onclick="emoji(7);">😊</button>
+<button onclick="emoji(8);">😅</button>
+<button onclick="emoji(9);">😆</button>
+<button onclick="emoji(10);">😇</button>
+<button onclick="emoji(11);">😈</button>
+<button onclick="emoji(12);">😉</button>
+<button onclick="emoji(13);">😋</button>
+<button onclick="emoji(14);">😍</button>
+<button onclick="emoji(15);">😎</button>
+<button onclick="emoji(16);">😏</button>
+<button onclick="emoji(17);">😐</button>
+<button onclick="emoji(18);">😑</button>
+<button onclick="emoji(19);">😒</button>
+<button onclick="emoji(20);">😓</button>
+<button onclick="emoji(21);">😊</button>
+<button onclick="emoji(22);">😔</button>
+<button onclick="emoji(23);">😕</button>
+<button onclick="emoji(24);">😖</button>
+<button onclick="emoji(25);">😗</button>
+<button onclick="emoji(26);">😘</button>
+<button onclick="emoji(27);">😙</button>
+<button onclick="emoji(28);">😚</button>
+<button onclick="emoji(29);">😛</button>
+<button onclick="emoji(30);">😜</button>
+<button onclick="emoji(31);">😝</button>
+<button onclick="emoji(32);">😤</button>
+<button onclick="emoji(33);">😥</button>
+<button onclick="emoji(34);">😶</button>
+<button onclick="emoji(35);">🤔</button>
+<button onclick="emoji(36);">🤤</button>
+<button onclick="emoji(37);">✊</button>
+<button onclick="emoji(38);">☝</button>
+<button onclick="emoji(39);">✋</button>
+<button onclick="emoji(40);">✌</button>
+<button onclick="emoji(41);">✍</button>
+<button onclick="emoji(42);">👆</button>
+<button onclick="emoji(43);">👇</button>
+<button onclick="emoji(44);">👈</button>
+<button onclick="emoji(45);">👉</button>
+<button onclick="emoji(46);">👊</button>
+<button onclick="emoji(47);">👍</button>
+<button onclick="emoji(48);">👎</button>
+<button onclick="emoji(49);">👏</button>
+    </div>
+  </div>
+  <nav class="navbar navbar-dark bg-dark rounded-bottom">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+   😀
+    </button>
+<!-------------------------------------------------------------------------------------------------------------->
+<div id="arfile" class="btn-outline-warning">
+      <center>
+    <label for="imagefile">
+    <figure>
+     <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
+      </figure>
+      <span class="iborrainputfile"></span>
+      </label>
+      </center>
+        </div>
+   <!-------------------------------------------------------------------------------------------------------------->       
+<input class="form-control form-control-lg" type="text" id="message" placeholder="
+write message">
+
+          <button id="send" type="submit"  class="btn btn-primary"><audio  id="audio">
+              <source src="sound/inbox.mp3" type="audio/mpeg">
+            
+                </audio>Send</button>
+
+  </nav>
+ <!-------------------------------------------------------------------------------------------------------------->
+ <label for="hide">
+  <div id="content">
+    <input type='file' name="imagefile" accept='image/*' id="imagefile" onchange='openFile(event)' class="inputfile inputfile-5" data-multiple-caption="{count} archivos seleccionados" multiple=""></div>
+    </label>
+    </div>
+    <!-------------------------------------------------------------------------------------------------------------->
+    </div>
+<!-------------------------------------------------------------------------------------------------------------->
+ </div>
+  </div>
+</div>
+
+<!------------------------->
+
+    </div>
+</div>
+
+   <script src="/socket.io/socket.io.js"></script>
+   <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script> 
+   <script src="js/chat.js" charset="utf-8"></script>
+   <script src="js/emoji.js" charset="utf-8"></script>
+   
+</body>
+</html>
+
