@@ -1,151 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-   <meta name="viewport" content="width=500, initial-scale=1, maximum-scale=1, width=device-width,   user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Node.js</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/estilo.css" rel="stylesheet">
-    <link href="css/mdb.css" rel="stylesheet">
-    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="img/node.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="img/node.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="img/node.png" sizes="64x64">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>NodeChat</title>
+  <meta name="description" content="Chat en tiempo real con Node.js y Socket.IO">
+  <link rel="icon" type="image/png" href="img/node.png" sizes="32x32">
+  <link rel="stylesheet" href="css/estilo.css">
 </head>
-<body aria-busy="true" onunload="myFunction();">
+<body>
 
-   <div class="container-fluid">
-  <div class="row">
-    <div class="col-xl-2 col-sm-12 col-12">
-   <h1><u>Node.js <small style="color:#007bff">Chat:</small></u></h1>  
- 
-            <em><strong>User:</strong></em>
-
-<input class="form-control form-control-lg" type="text" id="username" placeholder="user" required>     
-            
-            <em><strong>User list:</strong></em>
-<!-------------------------------------------------------------------------------------------------------->
-            <div class="scroll" style="width:200px;height:550px;">
-            <div id="usuarios" class="mx-3"></div>
-                </div>    
-<!--------------------------------------------------------------------------------------------------------->   
-    </div>
-    <div class="col-xl-10 col-sm-12 col-12  w-100 p-3">
-
-<div class="scroll" style="height: 636px;">
-                        <div id="chat"></div>
-                        <div id="output"></div>
-                        <div id="actions"></div>
-</div>
-<!--------------------------------------------------------------------------------------------------------->
- <div class="container ">
-  <div class="row">
-    <div class="col mt-2">
-
-<div class="pos-f-t ">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-<button onclick="emoji(1);">😜</button>
-<button onclick="emoji(2);">😂</button>
-<button onclick="emoji(3);">😋</button>
-<button onclick="emoji(4);">😇</button>
-<button onclick="emoji(5);">😌</button>
-<button onclick="emoji(6);">😀</button>
-<button onclick="emoji(7);">😊</button>
-<button onclick="emoji(8);">😅</button>
-<button onclick="emoji(9);">😆</button>
-<button onclick="emoji(10);">😇</button>
-<button onclick="emoji(11);">😈</button>
-<button onclick="emoji(12);">😉</button>
-<button onclick="emoji(13);">😋</button>
-<button onclick="emoji(14);">😍</button>
-<button onclick="emoji(15);">😎</button>
-<button onclick="emoji(16);">😏</button>
-<button onclick="emoji(17);">😐</button>
-<button onclick="emoji(18);">😑</button>
-<button onclick="emoji(19);">😒</button>
-<button onclick="emoji(20);">😓</button>
-<button onclick="emoji(21);">😊</button>
-<button onclick="emoji(22);">😔</button>
-<button onclick="emoji(23);">😕</button>
-<button onclick="emoji(24);">😖</button>
-<button onclick="emoji(25);">😗</button>
-<button onclick="emoji(26);">😘</button>
-<button onclick="emoji(27);">😙</button>
-<button onclick="emoji(28);">😚</button>
-<button onclick="emoji(29);">😛</button>
-<button onclick="emoji(30);">😜</button>
-<button onclick="emoji(31);">😝</button>
-<button onclick="emoji(32);">😤</button>
-<button onclick="emoji(33);">😥</button>
-<button onclick="emoji(34);">😶</button>
-<button onclick="emoji(35);">🤔</button>
-<button onclick="emoji(36);">🤤</button>
-<button onclick="emoji(37);">✊</button>
-<button onclick="emoji(38);">☝</button>
-<button onclick="emoji(39);">✋</button>
-<button onclick="emoji(40);">✌</button>
-<button onclick="emoji(41);">✍</button>
-<button onclick="emoji(42);">👆</button>
-<button onclick="emoji(43);">👇</button>
-<button onclick="emoji(44);">👈</button>
-<button onclick="emoji(45);">👉</button>
-<button onclick="emoji(46);">👊</button>
-<button onclick="emoji(47);">👍</button>
-<button onclick="emoji(48);">👎</button>
-<button onclick="emoji(49);">👏</button>
+  <!-- Welcome Screen -->
+  <div class="welcome-screen" id="welcomeScreen">
+    <div class="welcome-card">
+      <div class="welcome-logo">
+        <svg viewBox="0 0 212 212" width="80" height="80">
+          <path fill="#00a884" d="M106.251,0.5C164.653,0.5,212,47.846,212,106.25S164.653,212,106.25,212C47.846,212,0.5,164.654,0.5,106.25S47.846,0.5,106.251,0.5z"/>
+          <path fill="#FFF" d="M173.561,171.615c-0.601-0.915-1.287-1.907-2.065-2.955c-0.777-1.049-1.645-2.155-2.608-3.299c-0.964-1.144-2.024-2.326-3.184-3.527c-1.741-1.802-3.71-3.646-5.924-5.47c-2.952-2.431-6.339-4.824-10.204-7.026c-1.877-1.07-3.873-2.092-5.98-3.055c-0.062-0.028-0.118-0.059-0.18-0.087c-9.792-4.44-22.106-7.529-37.416-7.529s-27.624,3.089-37.416,7.529c-0.338,0.153-0.653,0.318-0.985,0.474c-1.431,0.674-2.806,1.376-4.128,2.101c-0.716,0.393-1.417,0.792-2.101,1.197c-3.421,2.027-6.475,4.191-9.15,6.395c-2.213,1.823-4.182,3.668-5.924,5.47c-1.161,1.201-2.22,2.384-3.184,3.527c-0.964,1.144-1.832,2.25-2.609,3.299c-0.778,1.049-1.464,2.04-2.065,2.955c-0.557,0.848-1.033,1.622-1.447,2.324c-0.033,0.056-0.073,0.119-0.104,0.174c-0.435,0.744-0.79,1.392-1.07,1.926c-0.559,1.068-0.818,1.678-0.818,1.678v0.398c18.285,17.927,43.322,28.985,70.945,28.985c27.678,0,52.761-11.103,71.055-29.095v-0.289c0,0-0.619-1.45-1.992-3.778C174.594,173.238,174.117,172.463,173.561,171.615z"/>
+          <path fill="#FFF" d="M106.002,125.5c2.645,0,5.212-0.253,7.68-0.737c1.234-0.242,2.443-0.542,3.624-0.896c1.772-0.532,3.482-1.188,5.12-1.958c2.184-1.027,4.242-2.258,6.15-3.67c2.863-2.119,5.39-4.646,7.509-7.509c0.706-0.954,1.367-1.945,1.98-2.971c0.919-1.539,1.729-3.155,2.422-4.84c0.462-1.123,0.872-2.277,1.226-3.458c0.177-0.591,0.341-1.188,0.49-1.792c0.299-1.208,0.542-2.443,0.725-3.701c0.275-1.887,0.417-3.827,0.417-5.811c0-1.984-0.142-3.925-0.417-5.811c-0.184-1.258-0.426-2.493-0.725-3.701c-0.15-0.604-0.313-1.202-0.49-1.793c-0.354-1.181-0.764-2.335-1.226-3.458c-0.693-1.685-1.504-3.301-2.422-4.84c-0.613-1.026-1.274-2.017-1.98-2.971c-2.119-2.863-4.646-5.39-7.509-7.509c-1.909-1.412-3.966-2.643-6.15-3.67c-1.638-0.77-3.348-1.426-5.12-1.958c-1.181-0.355-2.39-0.655-3.624-0.896c-2.468-0.484-5.035-0.737-7.68-0.737c-21.162,0-37.345,16.183-37.345,37.345C68.657,109.317,84.84,125.5,106.002,125.5z"/>
+        </svg>
+      </div>
+      <h1>NodeChat</h1>
+      <p class="welcome-subtitle">Ingresa tu nombre para unirte al chat</p>
+      <form class="welcome-form" id="welcomeForm" novalidate>
+        <input
+          type="text"
+          id="welcomeNameInput"
+          class="welcome-input"
+          placeholder="Tu nombre"
+          maxlength="30"
+          autocomplete="off"
+          autofocus
+          aria-label="Nombre de usuario"
+        >
+        <span class="welcome-error" id="welcomeError" role="alert"></span>
+        <button type="submit" class="welcome-btn" id="welcomeBtn">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+        </button>
+      </form>
+      <p class="welcome-hint">Tu nombre sera visible para todos los usuarios conectados</p>
     </div>
   </div>
-  <nav class="navbar navbar-dark bg-dark rounded-bottom">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-   😀
-    </button>
-<!-------------------------------------------------------------------------------------------------------------->
-<div id="arfile" class="btn-outline-warning">
-      <center>
-    <label for="imagefile">
-    <figure>
-     <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
-      </figure>
-      <span class="iborrainputfile"></span>
-      </label>
-      </center>
+
+  <!-- App (hidden until name is set) -->
+  <div class="app" id="app" style="display:none;">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" role="complementary" aria-label="Panel de usuarios">
+      <div class="sidebar-header">
+        <div class="sidebar-user-info">
+          <div class="sidebar-avatar" id="sidebarAvatar">
+            <span id="sidebarAvatarText"></span>
+          </div>
+          <span class="sidebar-username" id="sidebarUsername"></span>
         </div>
-   <!-------------------------------------------------------------------------------------------------------------->       
-<input class="form-control form-control-lg" type="text" id="message" placeholder="
-write message">
+        <div class="sidebar-header-actions">
+          <button class="btn-header" id="logoutBtn" aria-label="Cerrar sesion" type="button" title="Cambiar nombre">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+          </button>
+        </div>
+      </div>
 
-          <button id="send" type="submit"  class="btn btn-primary"><audio  id="audio">
-              <source src="sound/inbox.mp3" type="audio/mpeg">
-            
-                </audio>Send</button>
+      <div class="sidebar-section">
+        <label>Conectados</label>
+        <ul class="user-list" id="userList" role="list" aria-label="Usuarios conectados"></ul>
+      </div>
+    </aside>
 
-  </nav>
- <!-------------------------------------------------------------------------------------------------------------->
- <label for="hide">
-  <div id="content">
-    <input type='file' name="imagefile" accept='image/*' id="imagefile" onchange='openFile(event)' class="inputfile inputfile-5" data-multiple-caption="{count} archivos seleccionados" multiple=""></div>
-    </label>
-    </div>
-    <!-------------------------------------------------------------------------------------------------------------->
-    </div>
-<!-------------------------------------------------------------------------------------------------------------->
- </div>
+    <!-- Main -->
+    <main class="main" role="main">
+      <!-- Header -->
+      <header class="chat-header">
+        <div class="chat-header-info">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu de usuarios">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <div class="header-avatar">
+            <svg viewBox="0 0 212 212" width="40" height="40"><path fill="#DFE5E7" d="M106.251,0.5C164.653,0.5,212,47.846,212,106.25S164.653,212,106.25,212C47.846,212,0.5,164.654,0.5,106.25S47.846,0.5,106.251,0.5z"/><path fill="#FFF" d="M173.561,171.615c-0.601-0.915-1.287-1.907-2.065-2.955c-0.777-1.049-1.645-2.155-2.608-3.299c-0.964-1.144-2.024-2.326-3.184-3.527c-1.741-1.802-3.71-3.646-5.924-5.47c-2.952-2.431-6.339-4.824-10.204-7.026c-1.877-1.07-3.873-2.092-5.98-3.055c-0.062-0.028-0.118-0.059-0.18-0.087c-9.792-4.44-22.106-7.529-37.416-7.529s-27.624,3.089-37.416,7.529c-0.338,0.153-0.653,0.318-0.985,0.474c-1.431,0.674-2.806,1.376-4.128,2.101c-0.716,0.393-1.417,0.792-2.101,1.197c-3.421,2.027-6.475,4.191-9.15,6.395c-2.213,1.823-4.182,3.668-5.924,5.47c-1.161,1.201-2.22,2.384-3.184,3.527c-0.964,1.144-1.832,2.25-2.609,3.299c-0.778,1.049-1.464,2.04-2.065,2.955c-0.557,0.848-1.033,1.622-1.447,2.324c-0.033,0.056-0.073,0.119-0.104,0.174c-0.435,0.744-0.79,1.392-1.07,1.926c-0.559,1.068-0.818,1.678-0.818,1.678v0.398c18.285,17.927,43.322,28.985,70.945,28.985c27.678,0,52.761-11.103,71.055-29.095v-0.289c0,0-0.619-1.45-1.992-3.778C174.594,173.238,174.117,172.463,173.561,171.615z"/><path fill="#FFF" d="M106.002,125.5c2.645,0,5.212-0.253,7.68-0.737c1.234-0.242,2.443-0.542,3.624-0.896c1.772-0.532,3.482-1.188,5.12-1.958c2.184-1.027,4.242-2.258,6.15-3.67c2.863-2.119,5.39-4.646,7.509-7.509c0.706-0.954,1.367-1.945,1.98-2.971c0.919-1.539,1.729-3.155,2.422-4.84c0.462-1.123,0.872-2.277,1.226-3.458c0.177-0.591,0.341-1.188,0.49-1.792c0.299-1.208,0.542-2.443,0.725-3.701c0.275-1.887,0.417-3.827,0.417-5.811c0-1.984-0.142-3.925-0.417-5.811c-0.184-1.258-0.426-2.493-0.725-3.701c-0.15-0.604-0.313-1.202-0.49-1.793c-0.354-1.181-0.764-2.335-1.226-3.458c-0.693-1.685-1.504-3.301-2.422-4.84c-0.613-1.026-1.274-2.017-1.98-2.971c-2.119-2.863-4.646-5.39-7.509-7.509c-1.909-1.412-3.966-2.643-6.15-3.67c-1.638-0.77-3.348-1.426-5.12-1.958c-1.181-0.355-2.39-0.655-3.624-0.896c-2.468-0.484-5.035-0.737-7.68-0.737c-21.162,0-37.345,16.183-37.345,37.345C68.657,109.317,84.84,125.5,106.002,125.5z"/></svg>
+          </div>
+          <div>
+            <h2 id="chatTitle">Sala General</h2>
+            <div class="header-subtitle">
+              <span class="connection-dot connected" id="connectionDot"></span>
+              <span id="connectionText">Conectado</span>
+            </div>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="btn-header" id="menuBtn" aria-label="Menu" type="button">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12,7c1.104,0,2-0.896,2-2c0-1.105-0.895-2-2-2c-1.104,0-2,0.894-2,2C10,6.105,10.895,7,12,7z M12,9c-1.104,0-2,0.894-2,2c0,1.104,0.895,2,2,2c1.104,0,2-0.896,2-2C13.999,9.895,13.104,9,12,9z M12,15c-1.104,0-2,0.894-2,2c0,1.104,0.895,2,2,2c1.104,0,2-0.896,2-2C13.999,15.894,13.104,15,12,15z"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Messages -->
+      <div class="messages-container" id="messagesContainer" role="log" aria-live="polite" aria-label="Mensajes">
+        <div class="empty-state" id="emptyState">
+          <div class="icon">💬</div>
+          <h3>NodeChat Web</h3>
+          <p>Comienza a chatear en tiempo real. Tus mensajes se envian y reciben al instante.</p>
+        </div>
+      </div>
+
+      <!-- Typing -->
+      <div class="typing-indicator" id="typingIndicator">
+        <span id="typingText"></span>
+        <span class="typing-dots" id="typingDots" style="display:none">
+          <span></span><span></span><span></span>
+        </span>
+      </div>
+
+      <!-- File preview -->
+      <div class="file-upload" id="fileUpload">
+        <div class="file-preview">
+          <img id="filePreviewImg" src="" alt="Vista previa">
+          <span id="filePreviewName"></span>
+          <button class="remove-file" id="removeFileBtn" aria-label="Eliminar archivo">X</button>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div class="input-area">
+        <div class="emoji-picker" id="emojiPicker" role="dialog" aria-label="Selector de emojis"></div>
+        <div class="input-bar">
+          <button class="btn-icon" id="emojiBtn" aria-label="Abrir emojis" type="button">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
+          </button>
+          <button class="btn-icon" id="fileBtn" aria-label="Adjuntar imagen" type="button">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg>
+          </button>
+          <div class="input-wrapper">
+            <textarea id="messageInput" rows="1" placeholder="Escribe un mensaje" aria-label="Mensaje"></textarea>
+          </div>
+          <button class="btn-send" id="sendBtn" aria-label="Enviar mensaje" type="button">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <input type="file" id="fileInput" class="hidden-input" accept="image/*" aria-label="Seleccionar imagen">
+
+      <!-- Audio -->
+      <audio id="audioIncoming" preload="auto">
+        <source src="sound/inbox.mp3" type="audio/mpeg">
+      </audio>
+    </main>
   </div>
-</div>
 
-<!------------------------->
+  <!-- Mobile overlay -->
+  <div class="overlay" id="overlay"></div>
 
-    </div>
-</div>
-
-   <script src="/socket.io/socket.io.js"></script>
-   <script src="js/jquery.min.js"></script>
-   <script src="js/bootstrap.min.js"></script> 
-   <script src="js/chat.js" charset="utf-8"></script>
-   <script src="js/emoji.js" charset="utf-8"></script>
-   
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/chat.js"></script>
 </body>
 </html>
-
