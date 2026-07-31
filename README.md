@@ -142,4 +142,4 @@ chat/
 
 ## Licencia
 
-ISC
+ISC — Desarrollado por [obrian-code](https://github.com/obrian-code)
